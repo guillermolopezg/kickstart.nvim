@@ -307,6 +307,7 @@ require('telescope').setup {
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
+
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
@@ -567,8 +568,20 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 
-vim.keymap.set('n', '<leader>\\', vim.lsp.buf.hover, { desc = '[Shift][Shift] Hover LSP' })
+vim.keymap.set('n', '<leader>\\', vim.lsp.buf.hover, { desc = '\\ Hover LSP' })
 vim.keymap.set('n', '<leader>b', "<cmd>ToggleBlameLine<CR>")
 vim.keymap.set('n', '<leader><Tab>', "<cmd>Neotree<CR>")
+
+vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end)
+vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
+
+vim.keymap.set("n", "<C-s>", "<cmd>w<CR>")  -- ctrl + s for saving will use karabiner to replace cmd + s to ctrl + s???
+vim.keymap.set("i", "<C-s>", "<cmd>w<CR>")  -- for insert mode
+
+vim.keymap.set("n", "<leader>k", "<cmd>call InterestingWords('n')<CR>")
+vim.keymap.set("v", "<leader>k", "<cmd>call InterestingWords('v')<CR>")
+
+vim.keymap.set("n", "<leader>n", "<cmd>call WordNavigation(1)<CR>")
+vim.keymap.set("v", "<leader>N", "<cmd>call WordNavigation(0)<CR>")
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
